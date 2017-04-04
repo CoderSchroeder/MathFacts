@@ -15,6 +15,7 @@ namespace MathFacts
             int choice = 0;
             Addition addTable = new Addition();
             Multiplication timesTable = new Multiplication();
+            Subtraction minusTable = new Subtraction();
             do
             {
                 MainAppTitle();
@@ -144,9 +145,71 @@ namespace MathFacts
 
                     } while (continueChoice == true);
                 }
-                
-                
-            } while (choice != 3);
+                if (choice == 3)
+                {
+                    bool continueChoice = true;
+                    int startNum = 0;
+                    int endNum = 0;
+                    //TODO = title
+                    do
+                    {
+
+                        minusTable.SubtractionTitle();
+                        try
+                        {
+                            Console.WriteLine("Enter your starting number");
+                            startNum = Int32.Parse(Console.ReadLine());
+                            Console.WriteLine("Enter your ending number");
+                            endNum = Int32.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Please enter a valid number");
+                            Console.ReadLine();
+
+                        }
+                        finally
+                        {
+                            //TODO = validate startNum and endNum
+                            if (startNum > 0 && endNum <= 10)
+                            {
+                                minusTable.SubtractionTitle();
+                                Console.WriteLine("");
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("Your addition Table for {0} - {1}", startNum, endNum);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("");
+                                minusTable.SubtractionTitle(startNum, endNum);
+
+                                Console.WriteLine("");
+                                try
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Would you like more addition facts [y/n]");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    string moreFacts = Console.ReadLine();
+                                    if (moreFacts == "y")
+                                    {
+                                        continueChoice = true;
+                                    }
+                                    else if (moreFacts == "n")
+                                    {
+                                        continueChoice = false;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+
+                                    throw;
+                                }
+                            }
+
+                        }
+                    } while (continueChoice == true);
+
+                }
+
+            } while (choice != 4);
 
 
         }
@@ -161,7 +224,8 @@ namespace MathFacts
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Option 1: Addition Facts");
             Console.WriteLine("Option 2: Multiplication Facts");
-            Console.WriteLine("Option 3: Leave Math Facts");
+            Console.WriteLine("Option 3: Subtraction Facts");
+            Console.WriteLine("Option 4: Leave Math Facts");
             //TODO = handle wrong input, fix the exception handling
             choice = Int32.Parse(Console.ReadLine());
             return choice;
